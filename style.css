@@ -1,0 +1,244 @@
+:root {
+    --primary-color: #29a598;
+    --text-color: #394c4a;
+    --background-light: #ffffff;
+    --header-height: 100vh;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 110%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Work Sans', Helvetica, sans-serif;
+    color: #394c4a;
+    line-height: 1.5;
+    overflow-x: hidden;
+    min-height: 100%;
+}
+
+.header-background {
+    background: linear-gradient(rgba(255, 254, 253, 0.7), rgba(255, 254, 253, 0.9)), 
+                url("https://png.pngtree.com/thumb_back/fh260/background/20240610/pngtree-computer-of-a-programmer-with-lines-code-of-software-image_15746003.jpg") center center fixed;
+    background-size: cover;
+    text-align: center;
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+nav {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 0;
+}
+
+.navbar {
+    z-index: 1000; /* Ensures it stays on top */
+}
+
+nav ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Unica One', cursive;
+    font-size: 1.2rem;
+}
+
+.header-content img {
+    max-width: 250px;
+    border-radius: 50%;
+}
+
+.header-content h1, .header-content p {
+    margin: 0.5rem 0;
+    font-family: 'Unica One', cursive;
+
+}
+
+#about {
+    background-color: #ffffff;
+    height: 100vh;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin: 40px;
+    border-radius: 0.5%;
+    text-align: center;
+}
+
+.profile-photo {
+    max-width: 40%;
+    height: auto; 
+    border-radius: 50%; 
+}
+
+.icon-logo {
+    max-width: 40%;
+    max-height: 40%;
+    height: auto;
+    width: auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+
+#portfolio {
+    background-color: #0fbfbf;
+    height: 100vh;
+    padding: 25px;
+    border-radius: 0.5%;
+    text-align: center;
+    
+}
+
+.project {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ccc;
+    margin: 10px;
+    display: inline-block;
+    line-height: 200px;
+}
+
+#development {
+    background-color: #90be6d;
+    height: 100vh;
+    padding: 25px;
+    border-radius: 0.5%;
+    text-align: center;
+    
+}
+
+#contact {
+    background-color: #ffbc4b;
+    height: 100vh; 
+    padding: 25px;
+    border-radius: 0.5%;
+    text-align: center;
+}
+
+.td-btn {
+    padding: 12px 36px;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease-in-out;
+     background-color: #0fbfbf; 
+
+}
+
+footer {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Additional Styles */
+h2 {
+    color: #333;
+    font-family: 'Unica One', cursive;
+    font-size: 2.3rem;
+}
+
+a {
+    color: #29a598;
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: #208479;
+}
+
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+  
+  .profile-photo {
+        width: 50%; 
+        margin: 0 auto; 
+    }
+}
+
+/* Gallery container */
+.gallery-container {
+    position: relative;
+    width: 1400px;
+    max-width: 1500px;
+    height: 75vh;
+    overflow: hidden;
+    
+    border-radius: 10px;
+
+    margin-left: 35px;
+}
+
+/* Gallery images */
+.gallery-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 1s ease-in-out;
+    top: 0;
+    left: 0;
+}
+
+/* Show the first image */
+.gallery-image.active {
+    opacity: 1;
+}
+
+.slider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto;
+    width: 58%;
+}
+
+.slider-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.slider-button:hover {
+    background-color: #0056b3;
+  }
+  
+#slider-image {
+    max-width: 1400px;
+    width: 100vh;
+    height: 75vh;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
