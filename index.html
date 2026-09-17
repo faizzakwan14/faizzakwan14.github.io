@@ -1,74 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faiz Zakwan — Digital Transformation & Low-Code/AI Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #EEF0F3;
+    --bg-panel: #FFFFFF;
+    --ink: #14181F;
+    --ink-soft: #4B5563;
+    --line: #DADFE6;
+    --teal: #0E7E80;
+    --teal-dark: #0A5F60;
+    --amber: #D98C2B;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', system-ui, sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk', system-ui, sans-serif;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  a{color:var(--teal-dark);}
+  .wrap{max-width:880px; margin:0 auto; padding:0 24px;}
+
+  /* Nav */
+  nav{
+    position:sticky; top:0; z-index:10;
+    background:rgba(238,240,243,0.9);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:14px; padding-bottom:14px;
+  }
+  nav .brand{font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:16px;}
+  nav ul{list-style:none; display:flex; gap:22px; margin:0; padding:0;}
+  nav a{color:var(--ink-soft); text-decoration:none; font-size:14px; font-weight:500;}
+  nav a:hover{color:var(--teal-dark);}
+
+  /* Hero */
+  header.hero{padding:64px 0 48px;}
+  .hero-inner{display:flex; gap:36px; align-items:center; flex-wrap:wrap;}
+  .hero-photo img{
+    width:132px; height:132px; border-radius:50%;
+    object-fit:cover; border:3px solid var(--bg-panel);
+    box-shadow:0 0 0 1px var(--line);
+  }
+  .hero-text{flex:1; min-width:280px;}
+  .eyebrow{color:var(--teal-dark); font-weight:600; font-size:14px; margin-bottom:8px;}
+  h1.name{font-size:38px; font-weight:700;}
+  .role-line{font-size:17px; color:var(--ink-soft); margin-top:10px; max-width:560px;}
+  .hero-links{margin-top:18px; display:flex; gap:16px; flex-wrap:wrap; font-size:14px;}
+  .hero-links a{color:var(--ink-soft); text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:2px;}
+  .hero-links a:hover{color:var(--teal-dark); border-color:var(--teal-dark);}
+
+  section{padding:40px 0;}
+  section h2{
+    font-size:22px; font-weight:600; margin-bottom:20px;
+    padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+
+  /* About */
+  .about p{max-width:680px; color:var(--ink-soft); margin:0 0 14px;}
+
+  /* Experience timeline */
+  .timeline{position:relative; padding-left:26px;}
+  .timeline::before{
+    content:""; position:absolute; left:6px; top:6px; bottom:6px;
+    width:2px; background:var(--line);
+  }
+  .role{position:relative; margin-bottom:34px;}
+  .role:last-child{margin-bottom:0;}
+  .role::before{
+    content:""; position:absolute; left:-26px; top:6px;
+    width:11px; height:11px; border-radius:50%;
+    background:var(--teal); border:2px solid var(--bg);
+  }
+  .role-header{display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; margin-bottom:4px;}
+  .role-title{font-weight:600; font-size:16px;}
+  .role-org{color:var(--teal-dark); font-weight:500;}
+  .role-meta{color:var(--ink-soft); font-size:13.5px;}
+  .role ul{margin:10px 0 0; padding-left:18px; color:var(--ink-soft); font-size:14.5px;}
+  .role li{margin-bottom:6px;}
+
+  /* Skills */
+  .skill-group{margin-bottom:18px;}
+  .skill-group-label{font-weight:600; font-size:14px; margin-bottom:8px; color:var(--ink);}
+  .pills{display:flex; flex-wrap:wrap; gap:8px;}
+  .pill{
+    background:var(--bg-panel); border:1px solid var(--line);
+    padding:6px 12px; border-radius:6px; font-size:13.5px; color:var(--ink-soft);
+  }
+
+  /* Certifications */
+  .cert-list{list-style:none; margin:0; padding:0;}
+  .cert-list li{
+    display:flex; justify-content:space-between; gap:12px;
+    padding:12px 0; border-bottom:1px solid var(--line); font-size:14.5px;
+  }
+  .cert-list li:last-child{border-bottom:none;}
+  .cert-name{color:var(--ink);}
+  .cert-date{color:var(--ink-soft); white-space:nowrap;}
+
+  /* Projects */
+  .project-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:16px;}
+  .project-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px;
+    overflow:hidden;
+  }
+  .project-card img{width:100%; display:block; aspect-ratio:16/10; object-fit:cover;}
+  .project-card .caption{padding:10px 12px; font-size:13.5px; color:var(--ink-soft);}
+
+  /* Contact */
+  .contact-row{display:flex; gap:28px; flex-wrap:wrap; font-size:15px;}
+  .contact-row div span{display:block; font-size:12.5px; color:var(--ink-soft); margin-bottom:2px;}
+
+  footer{
+    text-align:center; color:var(--ink-soft); font-size:13px;
+    padding:30px 0 40px;
+  }
+
+  @media (max-width:560px){
+    h1.name{font-size:30px;}
+    .hero-inner{flex-direction:column; text-align:center;}
+    .hero-links{justify-content:center;}
+    .role-header{flex-direction:column;}
+  }
+</style>
 </head>
 <body>
-    <header class="header-background">
-        <nav class="navbar">
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Project</a></li>
-                <li><a href="#development">Development</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="header-content">
-            <img src="faiz_photo.jpg" alt="Profile Photo of Faiz">
-            <h1>Faiz Zakwan</h1>
-            <p>Science Computer Graduate | Ex - Software Developer Intern</p>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Faiz Zakwan</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-photo">
+      <img src="faiz_photo.jpg" alt="Photo of Faiz Zakwan">
+    </div>
+    <div class="hero-text">
+      <div class="eyebrow">Digital Transformation & Low-Code / AI Solutions</div>
+      <h1 class="name">Muhammad Faiz Zakwan bin Murad</h1>
+      <p class="role-line">Power Platform · Copilot Studio · Agentic AI — I take low-code and AI solutions from idea to adopted workflow, backed by real engineering discipline from a regulated banking environment.</p>
+      <div class="hero-links">
+        <a href="mailto:faizzakwan1421@gmail.com">faizzakwan1421@gmail.com</a>
+        <a href="tel:+60134113406">+60 13-411 3406</a>
+        <a href="https://www.linkedin.com/in/faizzakwan-murad" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about" class="about">
+  <div class="wrap">
+    <h2>About</h2>
+    <p>I'm a Computer Science graduate with hands-on transformation experience — scoping business requirements, prototyping on Microsoft Power Platform and Copilot Studio, and taking low-code solutions from concept to adopted workflow.</p>
+    <p>I build AI-powered knowledge agents, digitise manual processes, and consolidate fragmented data into centralised systems for cross-functional teams. That's paired with real engineering discipline: CI/CD pipelines and cloud automation from my time in a regulated banking environment at Bank Islam.</p>
+    <p>I'm currently based in Wangsa Maju, Kuala Lumpur, working at the Centre of Excellence at GFM Services Berhad, where I evaluate and roll out new low-code and AI tooling across the business.</p>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <h2>Experience</h2>
+    <div class="timeline">
+
+      <div class="role">
+        <div class="role-header">
+          <div>
+            <div class="role-title">Executive of Operation & Technical, Centre of Excellence</div>
+            <div class="role-org">GFM Services Berhad</div>
+          </div>
+          <div class="role-meta">Apr 2026 – Present · Taman Melawati, KL<br>incl. PROTÉGÉ Programme, Jan–Mar 2026</div>
         </div>
-    </header>
-    <main>
-        <section id="about">
-            <br>
-            <h2>About Me!</h2>
-            <img src="faiz_photo.jpg" alt="Faiz's Profile" class="profile-photo" hidden>
-            <p>I’m a passionate Computer Science graduate specializing in web and mobile application development. 
-                With hands-on experience from my internship<br> and multiple projects, I enjoy solving problems, building user-friendly applications 
-                and exploring innovative solutions in software development.</p>
-            <p>During my internship at Pusat Kejuteraan Termaju, FKAB, UKM, I gained hands-on experience in software development, focusing on IoT solutions. 
-                <br>I developed web and mobile applications, enhanced existing systems, and provided technical support. 
-                This opportunity allowed me to strengthen<br> my technical skills and deepen my understanding of IoT applications in various industries.</p>
-            <p>I have experience working with technologies like Java, PHP, MySQL, Xojo, and more, and I’m constantly expanding my skills in areas 
-                    like React JS <br>and JavaScript. I believe in continuous learning and always eager to take on new challenges to grow as a developer. 
-                    <br>Explore my portfolio to see the projects I’ve worked on.</p>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6935wo8bLZh5FeafJEffqWKDOpNpx6UE5bg&s" alt="Html Logo" class="icon-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1452px-CSS3_logo_and_wordmark.svg.png" alt="Css Logo" class="icon-logo">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOuQGJDPVhYsWOmo3Ym7_t-1iZufV3kWUZgw&s" alt="Xojo Logo" class="icon-logo">
-            <img src="https://logolook.net/wp-content/uploads/2024/01/MySQL-Logo.png" alt="MySQL Logo" class="icon-logo">
-        </section>
-        <section id="portfolio">
-            <h2> &#60; My Work &#62;</h2>
-            <div class="gallery-container">
-                <!-- Images for the gallery -->
-                <img src="login_kongsikod.png" class="gallery-image" alt="Image 1">
-                <img src="main_kongsikod.png" class="gallery-image" alt="Image 2">
-                <img src="login_myclinic.png" class="gallery-image" alt="Image 3">
-                <img src="form_myclinic.PNG" class="gallery-image" alt="Image 4">
-                <img src="list_myclinic.png" class="gallery-image" alt="Image 5">
-                <img src="list_ezronda.png" class="gallery-image" alt="Image 6">
-            </div>      
-        </section>
-        <section id="development">
-            <h2> &#60; Professional Development &#62;</h2>
-            <div class="slider">
-                <!-- Images for the gallery -->
-                <button class="slider-button" id="prev">❮</button>
-                <img id="slider-image" src="cert_github.jpg" alt="Image 1">
-                <button class="slider-button" id="next">❯</button>
-            </div>          
-        </section>
-        <section id="contact">
-            <h2>~ Keep in Touch ~</h2>
-            <p><strong>Email:</strong> <a href="mailto:faizzakwan1421@gmail.com">faizzakwan1421@gmail.com</a></p>
-            <p><strong>Phone:</strong> <a href="tel:+60134113406">+60134113406</a></p>
-        </section>
-    </main>
-    <script src="script.js"></script>
+        <ul>
+          <li>Scoped requirements with business stakeholders and prototyped an AI-powered Enterprise Knowledge Assistant in Microsoft Copilot Studio, taking it from concept to production in weeks — giving employees self-service access to process manuals, policy, and Code of Conduct guidance without routing through support teams.</li>
+          <li>Ran discovery workshops with operational teams to scope and digitise 8 manual reporting processes on Power Apps, replacing paper- and email-based submissions with a centralised digital workflow adopted across the business unit.</li>
+          <li>Designed and built an internal CRM on Power Apps and SharePoint Lists after consulting Sales & Tender and Business Development teams, consolidating customer records previously scattered across individual Excel files into one cross-functional system.</li>
+          <li>Built ESG dashboards in Power BI consolidating data from 11 business segments into a single view for monthly management reporting, replacing manual spreadsheet compilation and cutting reporting turnaround.</li>
+          <li>Supported Centre of Excellence capability-building activity — evaluating new low-code and AI tooling and helping colleagues adopt it.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <div>
+            <div class="role-title">Platform Engineering Trainee</div>
+            <div class="role-org">Bank Islam Malaysia Berhad</div>
+          </div>
+          <div class="role-meta">May 2025 – Oct 2025 · Kuala Lumpur</div>
+        </div>
+        <ul>
+          <li>Implemented and rolled out a standardised GitLab CI/CD pipeline configuration (YAML) across 30+ repositories, integrating automated build, test, and SonarQube quality-gate checks to improve delivery consistency in a regulated environment.</li>
+          <li>Replaced manual monitoring with a serverless AWS Lambda solution for real-time alerting, cutting detection time from daily manual checks to near-instant.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <div>
+            <div class="role-title">Software Developer Intern</div>
+            <div class="role-org">Pusat Kejuteraan Termaju, FKAB, UKM</div>
+          </div>
+          <div class="role-meta">Mar 2023 – Jul 2023 · Bangi</div>
+        </div>
+        <ul>
+          <li>Developed and deployed web applications to client specifications; provided technical support and system administration, reducing troubleshooting time and ensuring smooth operations.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+
+    <div class="skill-group">
+      <div class="skill-group-label">AI & Low-Code Automation</div>
+      <div class="pills">
+        <span class="pill">Copilot Studio</span>
+        <span class="pill">Power Apps (Canvas & Model-Driven)</span>
+        <span class="pill">Power Automate</span>
+        <span class="pill">Agentic Automation</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-label">Data & Reporting</div>
+      <div class="pills">
+        <span class="pill">Power BI</span>
+        <span class="pill">SharePoint</span>
+        <span class="pill">Dataverse</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-label">Programming & Data</div>
+      <div class="pills">
+        <span class="pill">Python</span>
+        <span class="pill">SQL</span>
+        <span class="pill">Java</span>
+        <span class="pill">PHP</span>
+        <span class="pill">JavaScript</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-label">DevOps & Cloud</div>
+      <div class="pills">
+        <span class="pill">AWS (Lambda, SNS, SES, CloudWatch)</span>
+        <span class="pill">GitLab CI/CD</span>
+        <span class="pill">SonarQube</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-label">Delivery & Process</div>
+      <div class="pills">
+        <span class="pill">Stakeholder Workshops</span>
+        <span class="pill">Business Process Reengineering</span>
+        <span class="pill">Cross-Functional Rollout</span>
+        <span class="pill">Adoption Tracking</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="wrap">
+    <h2>Certifications & Training</h2>
+    <ul class="cert-list">
+      <li><span class="cert-name">AI-Driven Facilities Management — Zenith Bizness Excellence</span><span class="cert-date">Jul 2026</span></li>
+      <li><span class="cert-name">CompTIA Tech+ (FC0-U71) — CompTIA</span><span class="cert-date">Sept 2025</span></li>
+      <li><span class="cert-name">Khazanah K-Youth Employment Programme — Aisling Consulting</span><span class="cert-date">May 2025</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Earlier Projects</h2>
+    <p style="color:var(--ink-soft); margin-top:-8px; margin-bottom:20px; font-size:14.5px;">Academic and personal projects from my Computer Science coursework.</p>
+    <div class="project-grid">
+      <div class="project-card">
+        <img src="login_kongsikod.png" alt="KongsiKod login screen">
+        <div class="caption">KongsiKod — login</div>
+      </div>
+      <div class="project-card">
+        <img src="main_kongsikod.png" alt="KongsiKod main screen">
+        <div class="caption">KongsiKod — main dashboard</div>
+      </div>
+      <div class="project-card">
+        <img src="login_myclinic.png" alt="MyClinic login screen">
+        <div class="caption">MyClinic — login</div>
+      </div>
+      <div class="project-card">
+        <img src="form_myclinic.PNG" alt="MyClinic form screen">
+        <div class="caption">MyClinic — patient form</div>
+      </div>
+      <div class="project-card">
+        <img src="list_myclinic.png" alt="MyClinic list screen">
+        <div class="caption">MyClinic — records list</div>
+      </div>
+      <div class="project-card">
+        <img src="list_ezronda.png" alt="EzRonda list screen">
+        <div class="caption">EzRonda — records list</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <div class="contact-row">
+      <div><span>Email</span><a href="mailto:faizzakwan1421@gmail.com">faizzakwan1421@gmail.com</a></div>
+      <div><span>Phone</span><a href="tel:+60134113406">+60 13-411 3406</a></div>
+      <div><span>Location</span>Wangsa Maju, Kuala Lumpur</div>
+      <div><span>LinkedIn</span><a href="https://www.linkedin.com/in/faizzakwan-murad" target="_blank" rel="noopener">linkedin.com/in/faizzakwan-murad</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>Muhammad Faiz Zakwan bin Murad — © 2026</footer>
+
 </body>
 </html>
- 
